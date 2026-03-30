@@ -8,7 +8,6 @@ from skfuzzy import control as ctrl
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
-from utils.geminiAPI import get_nutrition_from_image
 
 app = Flask(__name__)
 
