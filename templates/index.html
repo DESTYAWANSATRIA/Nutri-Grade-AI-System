@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistem Deteksi Minuman (Skripsi)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { background-color: #f0f2f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+      .main-container { max-width: 800px; margin: 50px auto; }
+      .card-header-custom { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 15px 15px 0 0 !important; }
+      .card { border-radius: 15px; border: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+      .result-box { padding: 20px; border-radius: 10px; color: white; margin-top: 15px; text-align: center; }
+      .img-preview { max-width: 250px; height: auto; border-radius: 10px; border: 3px solid #dee2e6; margin-bottom: 15px; }
+      .metric-box { background: #f8f9fa; border-radius: 10px; padding: 10px; text-align: center; border: 1px solid #e9ecef; }
+      .grade-img { height: 60px; width: auto; object-fit: contain; }
+    </style>
+  </head>
+  <body>
+    <div class="container main-container">
+
+      <!-- HEADER -->
+      <div class="text-center mb-5">
+        <h1 class="fw-bold">🥤 Nutri-Grade AI System</h1>
+        <p class="lead text-muted">Klasifikasi Minuman & Rekomendasi Konsumsi Cerdas</p>
+      </div>
+
+      <!-- FORM UPLOAD -->
+      <div class="card mb-4">
+        <div class="card-header card-header-custom text-center py-3">
+          <h5 class="mb-0">🔍 Upload Foto Minuman</h5>
+        </div>
+        <div class="card-body p-4">
+          <form method="post" enctype="multipart/form-data" class="text-center">
+            <div class="mb-4">
+              <input class="form-control form-control-lg" type="file" name="file" id="file" required accept=".jpg,.jpeg,.png">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg w-100 shadow-sm">Analisis Gambar</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- HASIL ANALISIS (Muncul hanya jika ada result) -->
+      {% if result %}
+      <div class="card shadow-lg">
+        <div class="card-body p-4">
+          <div class="row align-items-center">
+
+            <!-- Kolom Kiri: Gambar Input -->
+            <div class="col-md-5 text-center">
+              <h6 class="text-muted mb-2">Citra Input</h6>
+              <img src="{{ result.image }}" class="img-preview shadow-sm" alt="Input Image">
+            </div>
+
+            <!-- Kolom Kanan: Detail -->
+            <div class="col-md-7">
+              <h6 class="text-muted text-uppercase small mb-1">Hasil Deteksi Produk</h6>
+
+              <!-- Nama Produk & Badge Grade -->
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="fw-bold text-primary mb-0">{{ result.product }}</h2>
+                {% if result.grade != '-' %}
+                  <div class="text-center">
+                    <img src="{{ url_for('static', filename='images/' + result.grade + '.png') }}"
+                         alt="Grade {{ result.grade }}"
+                         class="grade-img"
+                         onerror="this.style.display='none'">
+                    <div class="small fw-bold text-muted mt-1">Grade {{ result.grade }}</div>
+                  </div>
+                {% endif %}
+              </div>
+
+              <div class="row g-2 mb-3">
+                <div class="col-6">
+                  <div class="metric-box">
+                    <small class="text-muted d-block">Gula / 100ml</small>
+                    <span class="fs-4 fw-bold text-dark">{{ result.gula }}g</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="metric-box">
+                    <small class="text-muted d-block">Lemak Jenuh / 100ml</small>
+                    <span class="fs-4 fw-bold text-dark">{{ result.lemak }}g</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Box Rekomendasi Fuzzy -->
+               <!-- Box Rekomendasi Fuzzy -->
+              <!-- Menggunakan inline style untuk warna custom -->
+              <div class="result-box" style="background-color: {{ result.bg_color }}; color: {{ result.text_color }};">
+                <h6 class="mb-1 opacity-75">Saran Konsumsi (Fuzzy Logic)</h6>
+                <h4 class="fw-bold mb-1">{{ result.saran }}</h4>
+                <small>Skor Kesehatan: {{ result.skor }} / 100</small>
+                <p class="text-muted small mt-2">Sumber Data Gizi: <strong>{{ result.sumber_data }}</strong></p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="text-center mt-5 text-muted">
+        <small>&copy; 2025 Skripsi Destyawan Satria Nugraha - Informatika UAD</small>
+      </div>
+
+    </div>
+  </body>
+</html>
