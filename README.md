@@ -1,32 +1,62 @@
 # Nutri-Grade AI System
 > Klasifikasi Minuman & Rekomendasi Konsumsi Cerdas Berbasis CNN dan Logika Fuzzy Mamdani
 
-Sistem kecerdasan buatan end-to-end yang memadukan Computer Vision untuk mengenali 30 jenis produk minuman kemasan di pasaran dan Logika Fuzzy Mamdani untuk menghitung skor kelayakan konsumsi secara granular berdasarkan kandungan gula dan lemak jenuh.
+Sistem kecerdasan buatan *end-to-end* yang memadukan *Computer Vision* untuk mengenali 30 jenis produk minuman kemasan di pasaran dan Logika Fuzzy Mamdani untuk menghitung skor kelayakan konsumsi secara granular berdasarkan kandungan gula dan lemak jenuh.
 
 **Tech Stack:** `Python`, `TensorFlow/Keras`, `Scikit-Fuzzy`, `Flask`
 
 ---
 
-### Diagram Alir Sistem
+### 🎯 Latar Belakang & Business Impact
+Tingginya angka diabetes dan kebingungan konsumen dalam membaca tabel Informasi Nilai Gizi (ING) memicu kebutuhan akan sistem identifikasi instan. Sistem ini dibangun untuk menerjemahkan data gizi yang kompleks menjadi skor rekomendasi yang manusiawi secara *real-time*, membantu konsumen mengambil keputusan sehat hanya dengan memindai kemasan minuman.
+
+---
+
+### 🔄 Diagram Alir Sistem
 
 1.  **Pengumpulan Dataset**
 2.  **Proses Paralel:**
-    *   **Jalur Citra:**
+    * **Jalur Citra:**
         1.  Dataset Citra Produk
         2.  Preprocessing Citra (resize, normalisasi, augmentasi)
         3.  Pelatihan Model CNN
         4.  Output: Klasifikasi Citra
-    *   **Jalur Gizi:**
+    * **Jalur Gizi:**
         1.  Informasi Nilai Gizi
         2.  Preprocessing Data Gizi (Seleksi gula & lemak jenuh)
         3.  Normalisasi Gizi (Konversi ke / 100 ml)
         4.  Perhitungan Nutri-Grade (Penambahan kolom)
 3.  **Pencocokan Data** (Menggabungkan hasil klasifikasi citra dengan data gizi)
-4.  **Input untuk Fuzzy:**
-    *   Kandungan Gula/100ml
-    *   Kandungan Lemak Jenuh/100ml
+4.  **Input untuk Fuzzy:** Kandungan Gula/100ml & Kandungan Lemak Jenuh/100ml
 5.  **Sistem Fuzzy Mamdani** (Penentuan Rekomendasi Konsumsi)
 6.  **Output Akhir:** Klasifikasi Produk, Nutri-Grade, & Skor Rekomendasi Konsumsi
+
+---
+
+### 🌐 Arsitektur Backend & API (Flask)
+Model AI yang telah dilatih dibungkus menggunakan *framework* **Flask** untuk melayani permintaan dari antarmuka klien secara *real-time*. Sistem ini menerima *request* berupa citra masukan, memprosesnya melalui model hibrida (CNN + Fuzzy), dan mengembalikan hasil analisis dalam format JSON yang terstruktur.
+
+**Endpoint:** `POST /predict`
+
+**Contoh API Response (JSON):**
+```json
+{
+  "status": "success",
+  "produk": {
+    "nama_kelas": "Yakult",
+    "akurasi_prediksi": 0.98
+  },
+  "analisis_gizi": {
+    "gula_per_100ml": 14.2,
+    "lemak_jenuh_per_100ml": 0.0,
+    "nutri_grade": "D"
+  },
+  "rekomendasi": {
+    "skor_fuzzy": 38.5,
+    "kategori": "Buruk",
+    "pesan": "Berisiko tinggi, sebaiknya batasi konsumsi karena kandungan gula tinggi."
+  }
+}
 
 ---
 
