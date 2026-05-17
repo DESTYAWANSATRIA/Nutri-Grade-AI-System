@@ -39,6 +39,7 @@ Model AI yang telah dilatih dibungkus menggunakan *framework* **Flask** untuk me
 **Endpoint:** `POST /predict`
 
 **Contoh API Response (JSON):**
+
 ```json
 {
   "status": "success",
@@ -57,8 +58,7 @@ Model AI yang telah dilatih dibungkus menggunakan *framework* **Flask** untuk me
     "pesan": "Berisiko tinggi, sebaiknya batasi konsumsi karena kandungan gula tinggi."
   }
 }
-
----
+```
 
 ### 📊 Pengumpulan & Pra-pemrosesan Data
 
