@@ -67,7 +67,7 @@ Sistem kecerdasan buatan end-to-end yang memadukan Computer Vision untuk mengena
 29. Yakult
 30. You C 1000 Orange
 
-!Contoh Citra Dataset
+<img width="1080" height="1920" alt="dataset_sample" src="https://github.com/user-attachments/assets/6db6462a-13f8-479d-93de-2ed893748dc3" />
 *Contoh variasi citra dalam dataset yang diambil dengan latar belakang, sudut, dan pencahayaan berbeda.*
 
 ---
@@ -81,7 +81,7 @@ Menghindari model raksasa seperti VGG16 untuk mencegah overfitting pada dataset 
 -   **Regularization:** Penggunaan Dropout (0.5) yang terbukti sangat krusial dalam menyaring fitur tidak relevan dan mencegah model menghafal data latih.
 -   **Output:** Dense Layer dengan 30 neuron (Softmax) yang dioptimasi menggunakan Adam Optimizer dan Categorical Crossentropy.
 
-!Rancangan Arsitektur Model CNN
+<img width="1147" height="304" alt="cnn_architecture" src="https://github.com/user-attachments/assets/a085eb87-f1a5-4987-b7b7-a3417000dc11" />
 *Visualisasi arsitektur model CNN yang digunakan untuk klasifikasi citra produk.*
 
 > **[Evaluasi Model]** Sistem mencapai stabilitas konvergensi pada epoch ke-61 (dengan Early Stopping) dan menghasilkan akurasi global rata-rata sebesar 92% (Weighted Avg F1-Score) berdasarkan evaluasi Confusion Matrix.
@@ -105,7 +105,7 @@ Menghindari model raksasa seperti VGG16 untuk mencegah overfitting pada dataset 
 4.  **Defuzzifikasi (Defuzzification)**
     Himpunan fuzzy hasil agregasi diubah kembali menjadi nilai numerik (crisp) tunggal menggunakan metode Centroid (titik pusat massa), menghasilkan skor akhir antara 0-100.
 
-!Visualisasi Fungsi Keanggotaan Fuzzy
+<img width="1189" height="1790" alt="fuzzy_membership_functions" src="https://github.com/user-attachments/assets/245659a3-e70a-4371-bc20-b0278490aa22" />
 *Visualisasi Fungsi Keanggotaan Fuzzy untuk variabel input (Gula, Lemak Jenuh) dan output (Skor Rekomendasi).*
 
 #### Matriks Aturan Fuzzy (Rule Base)
@@ -167,13 +167,13 @@ Menghindari model raksasa seperti VGG16 untuk mencegah overfitting pada dataset 
 
 ### 🎥 Visualisasi & Live Demo
 
-!Screenshot Interface Web Flask
+<img width="1918" height="865" alt="web_interface" src="https://github.com/user-attachments/assets/6c29b28e-c912-422c-a34b-6cbbf2eee692" />
 *Screenshot Interface Web Flask*
 
-!Grafik Training Accuracy & Loss
+<img width="1006" height="470" alt="model_acurracy" src="https://github.com/user-attachments/assets/c285a753-568b-4007-bd23-aa6fb2e4ccaf" />
 *Grafik Training Accuracy & Loss*
 
-!Visualisasi Confusion Matrix
+<img width="2188" height="1990" alt="confusion_matrix" src="https://github.com/user-attachments/assets/c989f81d-1540-49a1-b687-09506389983d" />
 *Visualisasi Confusion Matrix*
 
 <br>
